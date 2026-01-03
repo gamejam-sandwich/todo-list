@@ -10,8 +10,8 @@ export default function Input(props) {
     const task = Object.fromEntries(new FormData(ev.target));
 
     setError("");
-    const name = task.name.trim();
-    if (!name) {
+    const taskName = task.task.trim();
+    if (!taskName) {
       setError("Task cannot be blank.");
       taskRef.current.focus();
       return;
@@ -19,20 +19,20 @@ export default function Input(props) {
 
     const priority = task.priority;
     taskRef.current.value = "";
-    priorityRef.current.value = "Urgent";
+    priorityRef.current.value = "3";
     taskRef.current.focus();
-    props.onLog(name, priority);
+    props.onLog(taskName, priority);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <input name="task" placeholder="Ex: Read chapter 20" />
-        <select name="priority">
-          <option value="Urgent">Urgent</option>
-          <option value="High">High</option>
-          <option value="Normal">Normal</option>
-          <option value="Low">Low</option>
+        <input ref={taskRef} name="task" placeholder="Ex: Read chapter 20" />
+        <select ref={priorityRef} name="priority">
+          <option value="3">Urgent</option>
+          <option value="2">High</option>
+          <option value="1">Normal</option>
+          <option value="0">Low</option>
         </select>
         <button type="submit">Submit</button>
       </div>
