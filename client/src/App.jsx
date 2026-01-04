@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "./api.js";
 import Input from "./Input.jsx";
+import TaskItem from "./TaskItem.jsx";
 import styles from "./App.module.css";
 
 export default function App() {
@@ -24,22 +25,17 @@ export default function App() {
     setTaskList((prev) => prev.filter((food) => food.id !== id));
   };
 
-  const priorityList = ["Low", "Normal", "High", "Urgent"];
   return (
     <div className={styles.box}>
       <h1>Your tasks, Boss.</h1>
       <ul className={styles.list}>
-        {taskList.toSorted((a, b) => b.priority - a.priority).map((task) => (
-          <li key={task.id}>
-            {task.task} | Priority: {priorityList[task.priority]}
-            <button
-              onClick={() => handleDelete(task.id)}
-              className={styles.button}
-            >
-              Delete
-            </button>
-          </li>
-        ))}
+        {taskList
+          .toSorted((a, b) => b.priority - a.priority)
+          .map((task) => (
+            <li key={task.id}>
+              <TaskItem {...task} onDelete={() => handleDelete(task.id)} />
+            </li>
+          ))}
       </ul>
       <img src="/serve.png" className={styles.img}></img>
       <div className={styles.divider}></div>
