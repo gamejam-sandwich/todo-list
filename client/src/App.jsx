@@ -1,6 +1,6 @@
 import useTaskList from "./useTaskList.js";
 import Input from "./Input.jsx";
-import TaskItem from "./TaskItem.jsx";
+import TaskTable from "./TaskTable.jsx";
 import styles from "./App.module.css";
 
 export default function App() {
@@ -9,17 +9,12 @@ export default function App() {
   return (
     <div className={styles.box}>
       <h1>Your tasks, Boss.</h1>
-      <ul className={styles.list}>
-        {taskList
-          .toSorted((a, b) => b.priority - a.priority)
-          .map((task) => (
-            <li key={task.id}>
-              <TaskItem {...task} onDelete={() => handleDelete(task.id)} />
-            </li>
-          ))}
-      </ul>
-      <img src="/serve.png" className={styles.img}></img>
-      <div className={styles.divider}></div>
+      <TaskTable
+        taskList={taskList}
+        onDelete={handleDelete}
+      />
+      <img src="/serve.png" className={styles.img}/>
+      <div className={styles.divider}/>
       <Input onLog={handleLog} />
     </div>
   );
