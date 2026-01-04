@@ -1,4 +1,5 @@
 import pg from "pg";
+import "dotenv/config";
 
 const { Pool } = pg;
 
@@ -6,8 +7,8 @@ const { Pool } = pg;
 const pool = new Pool({
     host: "localhost",
     port: 5432,
-    user: "postgres",
-    password: "password",
+    user: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
     database: "todolist",
     ssl: false
 });
