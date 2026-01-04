@@ -29,7 +29,7 @@ export default function App() {
     <div className={styles.box}>
       <h1>Your tasks, Boss.</h1>
       <ul className={styles.list}>
-        {taskList.map((task) => (
+        {taskList.toSorted((a, b) => b.priority - a.priority).map((task) => (
           <li key={task.id}>
             {task.task} | Priority: {priorityList[task.priority]}
             <button

@@ -13,10 +13,7 @@ app.use(
 app.use(express.json());
 
 app.get("/task-list", async (req, res) => {
-  const { rows } = await pool.query(
-    `SELECT * FROM "task-list"
-    ORDER BY priority DESC`
-  );
+  const { rows } = await pool.query(`SELECT * FROM "task-list"`);
   console.log(rows);
   res.json(rows);
 });
@@ -37,13 +34,10 @@ app.post("/task-list", async (req, res) => {
   }
 });
 
-app.delete("/task-list/:id", async(req, res) => {
-    await pool.query(
-        `DELETE FROM "task-list" WHERE id = $1`,
-        [req.params.id]
-    );
-    res.status(204).send();
-})
+app.delete("/task-list/:id", async (req, res) => {
+  await pool.query(`DELETE FROM "task-list" WHERE id = $1`, [req.params.id]);
+  res.status(204).send();
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
