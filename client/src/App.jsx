@@ -3,6 +3,10 @@ import Input from "./Input.jsx";
 import TaskTable from "./TaskTable.jsx";
 import styles from "./App.module.css";
 
+/**
+ * Purpose: use the task list
+ */
+
 export default function App() {
   const {taskList, handleLog, handleDelete} = useTaskList();
 

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import api from "./api.js";
 
+/**
+ * Purpose: manipulate the list of tasks
+ * handleLog: takes task,priority,category params. Calls POST to add a new task to table. Adds new task to taskList.
+ * handelDelete: takes id param. Calls DELETE to remove task from table by id. Filters taskList to remove by id.
+ */
 export default function useTaskList() {
   const [taskList, setTaskList] = useState([]);
   useEffect(() => {
@@ -11,9 +16,9 @@ export default function useTaskList() {
     })();
   }, []);
 
-  const handleLog = async (task, priority) => {
-    console.log(task, priority);
-    const { data } = await api.post("/task-list", { task, priority });
+  const handleLog = async (task, priority, category) => {
+    console.log(task, priority, category);
+    const { data } = await api.post("/task-list", { task, priority, category });
     setTaskList((prev) => [...prev, data]);
   };
 

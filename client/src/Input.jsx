@@ -1,9 +1,15 @@
 import { useRef, useState } from "react";
 import styles from "./Input.module.css";
 
+/**
+ * Purpose: handle the process of inputting new tasks
+ * Props: returns values to parent prop
+ * handleSubmit: creates task object from input information. A few checks for validity.
+ */
 export default function Input(props) {
   const taskRef = useRef(null);
   const priorityRef = useRef(null);
+  const categoryRef = useRef(null);
   const [error, setError] = useState("");
 
   const handleSubmit = (ev) => {
@@ -19,10 +25,12 @@ export default function Input(props) {
     }
 
     const priority = task.priority;
+    const category = task.category;
     taskRef.current.value = "";
     priorityRef.current.value = "3";
+    categoryRef.current.value = "0";
     taskRef.current.focus();
-    props.onLog(taskName, priority);
+    props.onLog(taskName, priority, category);
   };
 
   return (
@@ -36,6 +44,13 @@ export default function Input(props) {
           <option value="1">Normal</option>
           <option value="0">Low</option>
         </select>
+
+        <select ref={categoryRef} name="category" className={styles.dropdown}>
+          <option value="0">Personal</option>
+          <option value="1">Work</option>
+          <option value="2">School</option>
+        </select>
+
         <button type="submit" className={styles.button}>Submit</button>
       </div>
       <div>{error}</div>

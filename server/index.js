@@ -28,13 +28,13 @@ app.get("/task-list", async (req, res) => {
 
 app.post("/task-list", async (req, res) => {
   try {
-    const { task, priority } = req.body;
+    const { task, priority, category } = req.body;
     const { rows } = await pool.query(
       `
-        INSERT INTO "task-list" (task, priority)
-        VALUES ($1, $2)
-        RETURNING id, task, priority`,
-      [task, priority]
+        INSERT INTO "task-list" (task, priority, category)
+        VALUES ($1, $2, $3)
+        RETURNING id, task, priority, category`,
+      [task, priority, category]
     );
     res.status(201).json(rows[0]);
   } catch (err) {
