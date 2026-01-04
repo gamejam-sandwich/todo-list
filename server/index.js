@@ -13,7 +13,10 @@ app.use(
 app.use(express.json());
 
 app.get("/task-list", async (req, res) => {
-  const { rows } = await pool.query(`SELECT * FROM "task-list"`);
+  const { rows } = await pool.query(
+    `SELECT * FROM "task-list"
+    ORDER BY priority DESC`
+  );
   console.log(rows);
   res.json(rows);
 });

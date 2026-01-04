@@ -1,4 +1,28 @@
 .box {
-    color: pink;
-    border: 1px dotted red;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    border: 1px solid grey;
+}
+
+.button {
+    margin-left: 20px;
+    border-radius: 5px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.img {
+    width: 200px;
+    height: 200px;
+}
+
+.list {
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+
+.divider {
+    border: none;
+    height: 3px;
+    background-color: black;
+    width: 100%;
 }

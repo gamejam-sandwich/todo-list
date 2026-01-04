@@ -1,0 +1,24 @@
+.box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.dropdown {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.input {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.button {
+    border-radius: 5px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;   
+}
+
+.p {
+    text-align: center;
+}

@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import styles from "./Input.module.css";
 
 export default function Input(props) {
   const taskRef = useRef(null);
@@ -26,15 +27,16 @@ export default function Input(props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <input ref={taskRef} name="task" placeholder="Ex: Read chapter 20" />
-        <select ref={priorityRef} name="priority">
+      <p className={styles.p}>More for the platter.</p>
+      <div className={styles.box}>
+        <input ref={taskRef} name="task" placeholder="Ex: Read chapter 20" className={styles.input} />
+        <select ref={priorityRef} name="priority" className={styles.dropdown}>
           <option value="3">Urgent</option>
           <option value="2">High</option>
           <option value="1">Normal</option>
           <option value="0">Low</option>
         </select>
-        <button type="submit">Submit</button>
+        <button type="submit" className={styles.button}>Submit</button>
       </div>
       <div>{error}</div>
     </form>
