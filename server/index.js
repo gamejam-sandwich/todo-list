@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import pool from "./database.js";
 
+const internalError = {
+  error: "internal server error"
+}
 const app = express();
 const PORT = 3000;
 app.use(
@@ -13,9 +16,14 @@ app.use(
 app.use(express.json());
 
 app.get("/task-list", async (req, res) => {
-  const { rows } = await pool.query(`SELECT * FROM "task-list"`);
-  console.log(rows);
-  res.json(rows);
+  try {
+    const { rows } = await pool.query(`SELECT * FROM "task-list"`);
+    console.log(rows);
+    res.json(rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(internalError);
+  }
 });
 
 app.post("/task-list", async (req, res) => {
@@ -31,12 +39,18 @@ app.post("/task-list", async (req, res) => {
     res.status(201).json(rows[0]);
   } catch (err) {
     console.log(err);
+    res.status(500).json(internalError);
   }
 });
 
 app.delete("/task-list/:id", async (req, res) => {
-  await pool.query(`DELETE FROM "task-list" WHERE id = $1`, [req.params.id]);
-  res.status(204).send();
+  try {
+    await pool.query(`DELETE FROM "task-list" WHERE id = $1`, [req.params.id]);
+    res.status(204).send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(internalError);
+  }
 });
 
 app.listen(PORT, () => {
