@@ -1,29 +1,10 @@
-import { useState, useEffect } from "react";
-import api from "./api.js";
+import useTaskList from "./useTaskList.js";
 import Input from "./Input.jsx";
 import TaskItem from "./TaskItem.jsx";
 import styles from "./App.module.css";
 
 export default function App() {
-  const [taskList, setTaskList] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const { data } = await api.get("/task-list");
-      console.log(data);
-      setTaskList(data);
-    })();
-  }, []);
-
-  const handleLog = async (task, priority) => {
-    console.log(task, priority);
-    const { data } = await api.post("/task-list", { task, priority });
-    setTaskList((prev) => [...prev, data]);
-  };
-
-  const handleDelete = async (id) => {
-    await api.delete(`/task-list/${id}`);
-    setTaskList((prev) => prev.filter((food) => food.id !== id));
-  };
+  const {taskList, handleLog, handleDelete} = useTaskList();
 
   return (
     <div className={styles.box}>
